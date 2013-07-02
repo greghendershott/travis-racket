@@ -1,0 +1,6 @@
+before_install:
+ - sudo apt-get install -qq racket
+
+script:
+ - raco make
+ - raco test -x .
