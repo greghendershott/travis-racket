@@ -1,6 +1,5 @@
 before_install:
  - chmod u+rx ./install-racket.sh
- - ls -l ./install-racket.sh
  - sudo ./install-racket.sh
 
 script:

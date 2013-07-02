@@ -1,18 +1,18 @@
-RACKET_VERSION=5.3.5
-RACKET_URL="http://download.racket-lang.org/installers/$VERSION/racket/racket-$VERSION-bin-x86_64-linux-f14.sh"
-RACKET_INSTALLER="racket-$VERSION.sh"
+VERSION=5.3.5
+URL="http://download.racket-lang.org/installers/$VERSION/racket/racket-$VERSION-bin-x86_64-linux-f14.sh"
+INSTALL="racket-$VERSION.sh"
 
-echo "Downloading $RACKET_URL to $RACKET_INSTALLER..."
-curl -o $RACKET_INSTALLER $RACKET_URL
+echo "Downloading $URL to $INSTALL..."
+curl -o $INSTALL $URL
 
-if [[ ! -f $RACKET_INSTALLER ]]; then
-	echo "Error downloading Racket $VERSION from $RACKET_URL"
+if [[ ! -f $INSTALL ]]; then
+	echo "Error downloading Racket $VERSION from $URL"
 	exit 1
 fi
 
 echo "Running Racket installer"
-chmod u+rx "$RACKET_INSTALLER"
-"$RACKET_INSTALLER" <<EOF
+chmod u+rx "$INSTALL"
+"$INSTALL" <<EOF
 no
 1
 
