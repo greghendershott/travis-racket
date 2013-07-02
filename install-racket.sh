@@ -5,11 +5,6 @@ INSTALL="racket-$VERSION.sh"
 echo "Downloading $URL to $INSTALL..."
 curl -o $INSTALL $URL
 
-if [[ ! -f $INSTALL ]]; then
-	echo "Error downloading Racket $VERSION from $URL"
-	exit 1
-fi
-
 echo "Running Racket installer"
 chmod u+rx "$INSTALL"
 "$INSTALL" <<EOF
