@@ -2,5 +2,5 @@ before_install:
  - sudo apt-get install -qq racket
 
 script:
- - raco make
+ - raco make main.rkt
  - raco test -x .
