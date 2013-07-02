@@ -4,7 +4,6 @@ INSTALL="./racket-$VERSION.sh"
 
 echo "Downloading $URL to $INSTALL..."
 curl -o $INSTALL $URL
-ls -l "$INSTALL"
 
 echo "Running Racket installer..."
 chmod u+rx "$INSTALL"
