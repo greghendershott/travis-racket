@@ -1,7 +1,15 @@
+language: racket
+
 before_install:
  - chmod u+rx ./install-racket.sh
  - sudo ./install-racket.sh
 
+install:
+
+before_script:
+
 script:
  - /usr/racket/bin/raco make main.rkt
  - /usr/racket/bin/raco test -x .
+
+after_script:
