@@ -1,5 +1,6 @@
 before_install:
- - sudo apt-get install -qq racket
+ - chmod u+rx ./install-racket.sh
+ - sudo ./install-racket.sh
 
 script:
  - raco make main.rkt
