@@ -2,7 +2,7 @@ language: racket
 
 before_install:
  - chmod u+rx ./install-racket.sh
- - sudo ./install-racket.sh
+ - ./install-racket.sh
 
 install:
 
