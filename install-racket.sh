@@ -1,3 +1,5 @@
+set -e
+
 VERSION=5.3.5
 URL="http://download.racket-lang.org/installers/$VERSION/racket/racket-$VERSION-bin-x86_64-linux-ubuntu-precise.sh"
 INSTALL="./racket-$VERSION.sh"
