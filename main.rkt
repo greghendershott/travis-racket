@@ -1,5 +1,7 @@
 #lang racket
 
+;; A comment.
+
 (define (plus1 x)
   (add1 x))
 
