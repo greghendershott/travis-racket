@@ -14,7 +14,7 @@ echo "Running Racket installer"
 chmod u+rx "$RACKET_INSTALLER"
 "$RACKET_INSTALLER" <<EOF
 no
-4
+1
 
 EOF
 

@@ -1,7 +1,8 @@
 before_install:
  - chmod u+rx ./install-racket.sh
+ - ls -l ./install-racket.sh
  - sudo ./install-racket.sh
 
 script:
- - raco make main.rkt
- - raco test -x .
+ - /usr/racket/bin/raco make main.rkt
+ - /usr/racket/bin/raco test -x .
