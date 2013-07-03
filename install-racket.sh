@@ -14,6 +14,4 @@ no
 
 EOF
 
-export PATH=$PATH:/usr/racket/bin
-
 exit 0

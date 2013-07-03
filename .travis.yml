@@ -11,7 +11,7 @@ install:
 before_script:
 
 script:
- - raco make main.rkt
- - raco test -x .
+ - /usr/racket/bin/raco make main.rkt
+ - /usr/racket/bin/raco test -x .
 
 after_script:
