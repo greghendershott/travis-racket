@@ -1,7 +1,7 @@
 language: racket
 
 env:
- - VERSION=5.3.5
+ - RACKET_VERSION=5.3.5
 
 before_install:
  - chmod u+rx ./install-racket.sh
