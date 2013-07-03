@@ -1,7 +1,7 @@
 set -e
 
-URL="http://download.racket-lang.org/installers/$RACKET-VERSION/racket/racket-$RACKET-VERSION-bin-x86_64-linux-ubuntu-precise.sh"
-INSTALL="./racket-$RACKET-VERSION.sh"
+URL="http://download.racket-lang.org/installers/$RACKET_VERSION/racket/racket-$RACKET_VERSION-bin-x86_64-linux-ubuntu-precise.sh"
+INSTALL="./racket-$RACKET_VERSION.sh"
 
 echo "Downloading $URL to $INSTALL:"
 curl -o $INSTALL $URL
