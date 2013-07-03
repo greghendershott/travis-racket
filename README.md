@@ -13,6 +13,7 @@ To add this capability to your project, simply add the
 to your repo. You may need to change its `script` section's `raco
 make` and `raco test` parts.
 
-Here's a "badge" showing the status for this repo:
+Here's a "badge" showing the status for the `master` branch of this
+repo:
 
-[![Build Status](https://travis-ci.org/greghendershott/travis-racket.png)](https://travis-ci.org/greghendershott/travis-racket)
+[![Build Status](https://travis-ci.org/greghendershott/travis-racket.png?branch=master)](https://travis-ci.org/greghendershott/travis-racket)
