@@ -1,6 +1,15 @@
 language: c
 
+# Supply at least one RACKET_VERSION environment variable definition
+# here. RACKET_VERSION is used by the install-racket.sh script
+# (specifed below under before_install) to select the version of
+# Racket to download and install.
+#
+# If you supply more than one, you can create multiple builds (a
+# Travis-CI build matrix resulting in multiple builds). You can use
+# this to test against multiple Racket versions.
 env:
+ - RACKET_VERSION=5.3.4
  - RACKET_VERSION=5.3.5
 
 before_install:
@@ -10,6 +19,10 @@ install:
 
 before_script:
 
+# Here supply steps such as raco make, raco test, etc.  Note that you
+# need to supply /usr/racket/bin/ -- it's not in PATH. You can run
+# `raco pkg install --deps search-auto <pkg>` to install any required
+# packages without it getting stuck on a confirmation prompt.
 script:
  - /usr/racket/bin/raco make main.rkt
  - /usr/racket/bin/raco test -x .
