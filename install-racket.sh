@@ -1,6 +1,15 @@
 set -e
 
-URL="http://download.racket-lang.org/installers/$RACKET_VERSION/racket/racket-$RACKET_VERSION-bin-x86_64-linux-debian-squeeze.sh"
+if [ "$RACKET_VERSION" == "HEAD" ]; then
+    # Unfortunately there is no abstract URL for "HEAD" -- the nighly
+    # builds have a version number like 5.90.0.9 embedded in the
+    # URL. So this will need to be updated manually whenever the
+    # version is bumped.
+    URL="http://www.cs.utah.edu/plt/snapshots/current/installers/racket-5.90.0.9-x86_64-linux-precise.sh"
+else
+    URL="http://download.racket-lang.org/installers/$RACKET_VERSION/racket/racket-$RACKET_VERSION-bin-x86_64-linux-debian-squeeze.sh"
+fi
+
 INSTALL="./racket-${RACKET_VERSION}.sh"
 
 echo "Downloading $URL to $INSTALL:"
