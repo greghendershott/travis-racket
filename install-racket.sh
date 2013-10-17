@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -e
 
 if [ "$RACKET_VERSION" == "HEAD" ]; then
