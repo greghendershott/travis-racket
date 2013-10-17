@@ -1,8 +1,6 @@
-#!/bin/bash
-
 set -e
 
-if [ "$RACKET_VERSION" == "HEAD" ]; then
+if [ "$RACKET_VERSION" = "HEAD" ]; then
     # Unfortunately there is no abstract URL for "HEAD" -- the nighly
     # builds have a version number like 5.90.0.9 embedded in the
     # URL. So this will need to be updated manually whenever the
