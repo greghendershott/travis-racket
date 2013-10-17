@@ -20,7 +20,7 @@ echo "Running $INSTALL to install Racket:"
 chmod u+rx "$INSTALL"
 sudo "$INSTALL" <<EOF
 no
-1
+/usr/racket
 
 EOF
 
