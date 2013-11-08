@@ -28,4 +28,12 @@ script:
  - /usr/racket/bin/raco make main.rkt
  - /usr/racket/bin/raco test -x .
 
+# NOTE: If your repo is a Racket package with an info.rkt that
+# includes some `deps`, the following is more elegant:
+#
+# script:
+# - cd ..   # Travis did a cd into the dir. Back up, for the next:
+# - /usr/racket/bin/raco pkg install --deps search-auto --link <pkg>
+# - /usr/racket/bin/raco test -x -p <pkg>
+
 after_script:
