@@ -11,10 +11,12 @@ language: c
 env:
  - RACKET_VERSION=5.3.4
  - RACKET_VERSION=5.3.5
+ - RACKET_VERSION=5.92
  - RACKET_VERSION=HEAD
 
 before_install:
- - curl -L https://github.com/greghendershott/travis-racket/releases/download/v0.3/install-racket.sh | sh
+# - curl -L https://github.com/greghendershott/travis-racket/releases/download/v0.3/install-racket.sh | sh
+ - curl https://raw.github.com/greghendershott/travis-racket/master/install-racket.sh | sh
 
 install:
 
