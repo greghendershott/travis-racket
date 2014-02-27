@@ -19,8 +19,8 @@ before_install:
 # Temporarily use raw.github.com to test this. After tests OK, will
 # make a v0.5 and change this back to be an example of the right way
 # to do this.
-- curl https://raw.github.com/greghendershott/travis-racket/master/install-racket.sh | sh
-# - curl -L https://github.com/greghendershott/travis-racket/releases/download/v0.4/install-racket.sh | sh
+- curl https://raw.github.com/greghendershott/travis-racket/master/install-racket.sh | bash
+# - curl -L https://github.com/greghendershott/travis-racket/releases/download/v0.4/install-racket.sh | bash
 
 install:
 
