@@ -49,6 +49,9 @@ matrix:
 
 before_install:
   - git clone https://github.com/greghendershott/travis-racket.git
+  - cd travis-racket            # REMOVE BEFORE MERGING TO MASTER
+  - git checkout minimal        # REMOVE BEFORE MERGING TO MASTER
+  - cd ..                       # REMOVE BEFORE MERGING TO MASTER
   - cat travis-racket/install-racket.sh | bash # pipe to bash not sh!
   - export PATH="${RACKET_DIR}/bin:${PATH}" #install-racket.sh can't set for us
 
