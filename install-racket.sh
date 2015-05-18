@@ -4,7 +4,7 @@
 set -e
 
 if [[ "$RACKET_EDITION" = "" ]]; then
-    RACKET_EDITION = "FULL"
+    RACKET_EDITION="FULL"
 fi
 
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
