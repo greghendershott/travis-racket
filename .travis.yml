@@ -38,6 +38,7 @@ env:
 matrix:
   allow_failures:
     - env: RACKET_VERSION=HEAD
+    - env: RACKET_VERSION=HEAD RACKET_EDITION=MINIMAL
     - env: RACKET_VERSION=SCOPE_SNAPSHOT
     - env: RACKET_VERSION=RELEASE
   # Fast finish: Overall build result is determined as soon as any of
