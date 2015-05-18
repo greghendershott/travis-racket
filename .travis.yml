@@ -29,12 +29,22 @@ env:
     - RACKET_VERSION=6.1.1
     - RACKET_VERSION=HEAD
     - RACKET_VERSION=SCOPE_SNAPSHOT
+    # Optionally supply RACKET_EDITION with the value FULL or MINIMAL.
+    # Defaults to FULL.
+    - RACKET_VERSION=5.3.4 RACKET_EDITION=MINIMAL
+    - RACKET_VERSION=5.3.5 RACKET_EDITION=MINIMAL
+    - RACKET_VERSION=5.92 RACKET_EDITION=MINIMAL
+    - RACKET_VERSION=6.0 RACKET_EDITION=MINIMAL
+    - RACKET_VERSION=6.1 RACKET_EDITION=MINIMAL
+    - RACKET_VERSION=6.1.1 RACKET_EDITION=MINIMAL
+    - RACKET_VERSION=HEAD RACKET_EDITION=MINIMAL
 
 # You may want to test against certain versions of Racket, without
 # having them count against the overall success/failure.
 matrix:
   allow_failures:
     - env: RACKET_VERSION=HEAD
+    - env: RACKET_VERSION=HEAD RACKET_EDITION=MINIMAL
     - env: RACKET_VERSION=SCOPE_SNAPSHOT
   # Fast finish: Overall build result is determined as soon as any of
   # its rows have failed, or, all of its rows that aren't allowed to
