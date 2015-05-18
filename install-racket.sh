@@ -3,16 +3,36 @@
 
 set -e
 
+if [[ "$RACKET_EDITION" = "" ]]; then
+    RACKET_EDITION = "FULL"
+fi
+
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
-    URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/racket-test-current-x86_64-linux-precise.sh"
+    if [[ "$RACKET_EDITION" = "MINIMAL" ]]; then
+        URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/min-racket-current-x86_64-linux-precise.sh"
+    else
+        URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/racket-test-current-x86_64-linux-precise.sh"
+    fi
 elif [[ "$RACKET_VERSION" = "SCOPE_SNAPSHOT" ]]; then
     URL="http://www.cs.utah.edu/~mflatt/tmp/scope-snapshot/installers/racket-6.2.900.3-x86_64-linux.sh"
 elif [[ "$RACKET_VERSION" = 5.9* ]]; then
-    URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket-${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
+    if [[ "$RACKET_EDITION" = "MINIMAL" ]]; then
+        URL="http://mirror.racket-lang.org/installers/${RACKET_VERSION}/racket-minimal-${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
+    else
+        URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket-${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
+    fi
 elif [[ "$RACKET_VERSION" = 6.* ]]; then
-    URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket-${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
+    if [[ "$RACKET_EDITION" = "MINIMAL" ]]; then
+        URL="http://mirror.racket-lang.org/installers/${RACKET_VERSION}/racket-minimal-${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
+    else
+        URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket-${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
+    fi
 else
-    URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket/racket-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
+    if [[ "$RACKET_EDITION" = "MINIMAL" ]]; then
+        URL="http://mirror.racket-lang.org/installers/${RACKET_VERSION}/racket-textual/racket-textual-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
+    else
+        URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket/racket-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
+    fi
 fi
 
 # Older .travis.yml files don't set $RACKET_DIR (the Racket install
