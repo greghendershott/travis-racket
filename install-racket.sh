@@ -58,7 +58,7 @@ EOF
 
 if [[ "$RACKET_MINIMAL" = "1" ]]; then
     echo "Minimal Racket: Installing rackunit package..."
-    ${RACKET_DIR}/bin/raco pkg install --auto --scope installation rackunit-lib
+    ${RACKET_DIR}/bin/raco pkg install --auto --scope installation rackunit
 fi
 
 exit 0
