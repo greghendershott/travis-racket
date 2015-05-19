@@ -3,12 +3,8 @@
 
 set -e
 
-if [[ "$RACKET_EDITION" = "" ]]; then
-    RACKET_EDITION="FULL"
-fi
-
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
-    if [[ "$RACKET_EDITION" = "MINIMAL" ]]; then
+    if [[ "$RACKET_MINIMAL" = "1" ]]; then
         URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/min-racket-current-x86_64-linux-precise.sh"
     else
         URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/racket-test-current-x86_64-linux-precise.sh"
@@ -59,5 +55,10 @@ no
 "$RACKET_DIR"
 
 EOF
+
+if [[ "$RACKET_MINIMAL" = "1" ]]; then
+    echo "Minimal Racket: Installing rackunit package..."
+    raco pkg install --auto --scope installation rackunit
+fi
 
 exit 0

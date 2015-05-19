@@ -32,13 +32,19 @@ env:
     - RACKET_VERSION=HEAD
     - RACKET_VERSION=SCOPE_SNAPSHOT
     - RACKET_VERSION=RELEASE
+    # Optionally, can also supply RACKET_MINIMAL=1. Only works for
+    # Racket 6.0+ or HEAD.
+    - RACKET_VERSION=6.0 RACKET_MINIMAL=1
+    - RACKET_VERSION=6.1 RACKET_MINIMAL=1
+    - RACKET_VERSION=6.1.1 RACKET_MINIMAL=1
+    - RACKET_VERSION=HEAD RACKET_MINIMAL=1
 
 # You may want to test against certain versions of Racket, without
 # having them count against the overall success/failure.
 matrix:
   allow_failures:
     - env: RACKET_VERSION=HEAD
-    - env: RACKET_VERSION=HEAD RACKET_EDITION=MINIMAL
+    - env: RACKET_VERSION=HEAD RACKET_MINIMAL=1
     - env: RACKET_VERSION=SCOPE_SNAPSHOT
     - env: RACKET_VERSION=RELEASE
   # Fast finish: Overall build result is determined as soon as any of
@@ -61,7 +67,6 @@ before_script:
 
 # Here supply steps such as raco make, raco test, etc.
 script:
-  - raco pkg install --scope installation rackunit # in case minimal racket
   - raco test -x .
 
 # NOTE: If your repo is a Racket package with an info.rkt that
