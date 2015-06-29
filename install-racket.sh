@@ -6,7 +6,7 @@ set -e
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
     URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/racket-test-current-x86_64-linux-precise.sh"
 elif [[ "$RACKET_VERSION" = "SCOPE_SNAPSHOT" ]]; then
-    URL="http://www.cs.utah.edu/~mflatt/tmp/scope-snapshot/installers/racket-6.2.900.3-x86_64-linux.sh"
+    URL="http://www.cs.utah.edu/~mflatt/tmp/scope-snapshot/installers/racket-current-x86_64-linux.sh"
 elif [[ "$RACKET_VERSION" = 5.9* ]]; then
     URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket-${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
 elif [[ "$RACKET_VERSION" = 6.* ]]; then
