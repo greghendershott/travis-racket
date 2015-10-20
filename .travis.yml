@@ -1,6 +1,6 @@
 language: c
 
-# Optional: To use Travis CI's newer container infrastucture,
+# Optional: To use Travis CI's newer container infrastructure,
 # un-comment the following line. (Also be sure RACKET_DIR is set to
 # somewhere like ~/racket that doesn't require sudo.)
 #
@@ -21,6 +21,8 @@ env:
     # Supply more than one RACKET_VERSION (as in the example below) to
     # create a Travis-CI build matrix to test against multiple Racket
     # versions.
+    #
+    # The RELEASE snapshot is only available during the release process.
     - RACKET_VERSION=5.3.4
     - RACKET_VERSION=5.3.5
     - RACKET_VERSION=5.92
@@ -30,6 +32,7 @@ env:
     - RACKET_VERSION=6.2
     - RACKET_VERSION=HEAD
     - RACKET_VERSION=SCOPE_SNAPSHOT
+    - RACKET_VERSION=RELEASE
 
 # You may want to test against certain versions of Racket, without
 # having them count against the overall success/failure.
@@ -37,6 +40,7 @@ matrix:
   allow_failures:
     - env: RACKET_VERSION=HEAD
     - env: RACKET_VERSION=SCOPE_SNAPSHOT
+    - env: RACKET_VERSION=RELEASE
   # Fast finish: Overall build result is determined as soon as any of
   # its rows have failed, or, all of its rows that aren't allowed to
   # fail have succeeded.
