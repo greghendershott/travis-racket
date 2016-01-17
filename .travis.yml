@@ -1,10 +1,9 @@
 language: c
 
-# Optional: To use Travis CI's newer container infrastructure,
-# un-comment the following line. (Also be sure RACKET_DIR is set to
-# somewhere like ~/racket that doesn't require sudo.)
-#
-# sudo: false
+# To use Travis CI's newer container infrastructure, use the following
+# line. (Also be sure RACKET_DIR is set to somewhere like ~/racket
+# that doesn't require sudo.)
+sudo: false
 
 env:
   global:
