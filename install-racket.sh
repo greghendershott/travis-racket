@@ -3,32 +3,41 @@
 
 set -e
 
+if [[ "$RACKET_MINIMAL" = "1" ]]; then
+    MIN="minimal-"
+else
+    MIN=""
+fi
+
+DL_BASE="http://download.racket-lang.org/installers"
+
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
         URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/min-racket-current-x86_64-linux-precise.sh"
     else
         URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/racket-test-current-x86_64-linux-precise.sh"
     fi
-elif [[ "$RACKET_VERSION" = "SCOPE_SNAPSHOT" ]]; then
-    URL="http://www.cs.utah.edu/~mflatt/tmp/scope-snapshot/installers/racket-current-x86_64-linux.sh"
-elif [[ "$RACKET_VERSION" = "RELEASE" ]]; then
-    URL="http://pre-release.racket-lang.org/installers/racket-current-x86_64-linux.sh"
-elif [[ "$RACKET_VERSION" = 5.9* ]]; then
-    URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket-${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
-elif [[ "$RACKET_VERSION" = 6.[0-4]* ]]; then
-    URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket-${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
-elif [[ "$RACKET_VERSION" = 6.* ]]; then
-    URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket-${RACKET_VERSION}-x86_64-linux.sh"
-else
-    if [[ "$RACKET_EDITION" = "MINIMAL" ]]; then
-        URL="http://mirror.racket-lang.org/installers/${RACKET_VERSION}/racket-textual/racket-textual-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
+elif [[ "$RACKET_VERSION" = 5.3* ]]; then
+    if [[ "$RACKET_MINIMAL" = "1" ]]; then
+        URL="${DL_BASE}/${RACKET_VERSION}/racket-textual/racket-textual-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
     else
-        URL="http://download.racket-lang.org/installers/${RACKET_VERSION}/racket/racket-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
+        URL="${DL_BASE}/${RACKET_VERSION}/racket/racket-${MIN}${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
     fi
+elif [[ "$RACKET_VERSION" = "RELEASE" ]]; then
+    URL="http://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux.sh"
+elif [[ "$RACKET_VERSION" = 5.9* ]]; then
+    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
+elif [[ "$RACKET_VERSION" = 6.[0-4]* ]]; then
+    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
+elif [[ "$RACKET_VERSION" = 6.* ]]; then
+    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux.sh"
+else
+    echo "ERROR: Unsupported version ${RACKET_VERSION}"
+    exit 1
 fi
 
 if [ -n "$TEST" ]; then
-    echo -n "$RACKET_MINIMAL $RACKET_VERSION $URL "
+    printf "%s %-7s %-120s " $RACKET_MINIMAL $RACKET_VERSION $URL
     if curl -I -L $URL 2>&1 | grep 404.Not.Found ; then
         exit 1
     fi
@@ -42,7 +51,7 @@ if [[ "$RACKET_DIR" = "" ]]; then
     RACKET_DIR=/usr/racket
 fi
 
-INSTALLER="./racket-${RACKET_VERSION}.sh"
+INSTALLER="./racket-${MIN}${RACKET_VERSION}.sh"
 
 echo "Downloading $URL to $INSTALLER:"
 curl -L -o $INSTALLER $URL

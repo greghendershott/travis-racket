@@ -22,6 +22,9 @@ env:
     # versions.
     #
     # The RELEASE snapshot is only available during the release process.
+    #
+    # Optionally, can also supply RACKET_MINIMAL=1. Only works for
+    # Racket 6.0+ or HEAD.
     - RACKET_VERSION=5.3.4
     - RACKET_VERSION=5.3.5
     - RACKET_VERSION=5.92
@@ -30,10 +33,7 @@ env:
     - RACKET_VERSION=6.1.1
     - RACKET_VERSION=6.2
     - RACKET_VERSION=HEAD
-    - RACKET_VERSION=SCOPE_SNAPSHOT
     - RACKET_VERSION=RELEASE
-    # Optionally, can also supply RACKET_MINIMAL=1. Only works for
-    # Racket 6.0+ or HEAD.
     - RACKET_VERSION=6.0 RACKET_MINIMAL=1
     - RACKET_VERSION=6.1 RACKET_MINIMAL=1
     - RACKET_VERSION=6.1.1 RACKET_MINIMAL=1
@@ -45,7 +45,6 @@ matrix:
   allow_failures:
     - env: RACKET_VERSION=HEAD
     - env: RACKET_VERSION=HEAD RACKET_MINIMAL=1
-    - env: RACKET_VERSION=SCOPE_SNAPSHOT
     - env: RACKET_VERSION=RELEASE
   # Fast finish: Overall build result is determined as soon as any of
   # its rows have failed, or, all of its rows that aren't allowed to
