@@ -27,6 +27,15 @@ else
     fi
 fi
 
+if [ -n "$TEST" ]; then
+    echo -n "$RACKET_MINIMAL $RACKET_VERSION $URL "
+    if curl -I -L $URL 2>&1 | grep 404.Not.Found ; then
+        exit 1
+    fi
+    echo "GOOD"
+    exit 0
+fi
+
 # Older .travis.yml files don't set $RACKET_DIR (the Racket install
 # directory) explicitly and expect it to be /usr/racket.
 if [[ "$RACKET_DIR" = "" ]]; then
