@@ -30,7 +30,6 @@ env:
     - RACKET_VERSION=6.1.1
     - RACKET_VERSION=6.2
     - RACKET_VERSION=HEAD
-    - RACKET_VERSION=SCOPE_SNAPSHOT
     - RACKET_VERSION=RELEASE
 
 # You may want to test against certain versions of Racket, without
@@ -38,7 +37,6 @@ env:
 matrix:
   allow_failures:
     - env: RACKET_VERSION=HEAD
-    - env: RACKET_VERSION=SCOPE_SNAPSHOT
     - env: RACKET_VERSION=RELEASE
   # Fast finish: Overall build result is determined as soon as any of
   # its rows have failed, or, all of its rows that aren't allowed to
