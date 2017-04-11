@@ -22,13 +22,15 @@ env:
     # versions.
     #
     # The RELEASE snapshot is only available during the release process.
-    - RACKET_VERSION=5.3.4
-    - RACKET_VERSION=5.3.5
-    - RACKET_VERSION=5.92
-    - RACKET_VERSION=6.0
     - RACKET_VERSION=6.1
     - RACKET_VERSION=6.1.1
     - RACKET_VERSION=6.2
+    - RACKET_VERSION=6.3
+    - RACKET_VERSION=6.4
+    - RACKET_VERSION=6.5
+    - RACKET_VERSION=6.6
+    - RACKET_VERSION=6.7
+    - RACKET_VERSION=6.8
     - RACKET_VERSION=HEAD
     - RACKET_VERSION=RELEASE
 
@@ -54,19 +56,16 @@ install:
 before_script:
 
 # Here supply steps such as raco make, raco test, etc.
-#
-# Tip: Use `raco pkg install --deps search-auto <pkg>` to install any
-# required packages without getting stuck on a confirmation prompt.
 script:
   - raco make main.rkt
   - raco test -x .
 
-# NOTE: If your repo is a Racket package with an info.rkt that
-# includes some `deps`, the following is more elegant:
+# OR: If your repo is a Racket package with an info.rkt that includes
+# some `deps`:
 #
 # script:
-# - cd ..   # Travis did a cd into the dir. Back up, for the next:
-# - raco pkg install --deps search-auto --link <pkg>
-# - raco test -x -p <pkg>
+# - raco pkg install --deps search-auto
+# - raco setup -D --check-pkg-deps <your-package-name>
+# - raco test -x -p <your-package-name>
 
 after_script:
