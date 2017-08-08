@@ -37,10 +37,19 @@ else
 fi
 
 if [ -n "$TEST" ]; then
-    printf "%s %-7s %-120s " $RACKET_MINIMAL $RACKET_VERSION $URL
-    if curl -I -L $URL 2>&1 | grep 404.Not.Found ; then
-        exit 1
+  printf "%s %-7s %-120s " $RACKET_MINIMAL $RACKET_VERSION $URL
+fi
+
+echo "Checking installer"
+if  curl -I -L $URL 2>&1 | grep 404.Not.Found ; then
+    echo "Installer not available"
+    if [[ "$RACKET_VERSION" = "HEAD" ]]; then
+        echo "Did the build fail? Check the logs at https://plt.eecs.northwestern.edu/snapshots/current/log/"
     fi
+    exit 1
+fi
+
+if [ -n "$TEST" ]; then
     echo "GOOD"
     exit 0
 fi
