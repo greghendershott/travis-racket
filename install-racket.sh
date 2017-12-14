@@ -13,9 +13,9 @@ DL_BASE="http://download.racket-lang.org/installers"
 
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/min-racket-current-x86_64-linux-precise.sh"
+        URL="https://www.cs.utah.edu/plt/snapshots/current/installers/min-racket-current-x86_64-linux-precise.sh"
     else
-        URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/racket-test-current-x86_64-linux-precise.sh"
+        URL="https://www.cs.utah.edu/plt/snapshots/current/installers/racket-test-current-x86_64-linux-precise.sh"
     fi
 elif [[ "$RACKET_VERSION" = 5.3* ]]; then
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
