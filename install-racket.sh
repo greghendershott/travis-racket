@@ -9,7 +9,7 @@ else
     MIN=""
 fi
 
-DL_BASE="http://download.racket-lang.org/installers"
+DL_BASE="https://mirror.racket-lang.org/installers"
 
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
@@ -30,6 +30,8 @@ elif [[ "$RACKET_VERSION" = 5.9* ]]; then
 elif [[ "$RACKET_VERSION" = 6.[0-4] ]] || [[ "$RACKET_VERSION" = 6.[0-4].[0-9] ]]; then
     URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
 elif [[ "$RACKET_VERSION" = 6.* ]]; then
+    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux.sh"
+elif [[ "$RACKET_VERSION" = 7.* ]]; then
     URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux.sh"
 else
     echo "ERROR: Unsupported version ${RACKET_VERSION}"
