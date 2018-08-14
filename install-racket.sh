@@ -32,7 +32,11 @@ elif [[ "$RACKET_VERSION" = 6.[0-4] ]] || [[ "$RACKET_VERSION" = 6.[0-4].[0-9] ]
 elif [[ "$RACKET_VERSION" = 6.* ]]; then
     URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux.sh"
 elif [[ "$RACKET_VERSION" = 7.* ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux.sh"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-macosx.dmg"
+    else
+        URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux.sh"
+    fi
 else
     echo "ERROR: Unsupported version ${RACKET_VERSION}"
     exit 1
@@ -56,38 +60,51 @@ if [ -n "$TEST" ]; then
     exit 0
 fi
 
-# Older .travis.yml files don't set $RACKET_DIR (the Racket install
-# directory) explicitly and expect it to be /usr/racket.
-if [[ "$RACKET_DIR" = "" ]]; then
-    RACKET_DIR=/usr/racket
-fi
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    INSTALLER="./racket.dmg"
 
-INSTALLER="./racket-${MIN}${RACKET_VERSION}.sh"
+    echo "Downloading $URL to $INSTALLER:"
+    curl -L -o $INSTALLER $URL
 
-echo "Downloading $URL to $INSTALLER:"
-curl -L -o $INSTALLER $URL
-
-echo "Making $INSTALLER executable:"
-chmod u+rx "$INSTALLER"
-
-# Only use sudo if installing to /usr
-if [[ "$RACKET_DIR" = /usr* ]]; then
-    RUN_INSTALLER="sudo ${INSTALLER}"
+    echo "Mounting installer"
+    MOUNT=`hdiutil attach "$INSTALLER" | grep Volumes | cut -f 3`
+    cp -a "$MOUNT/Racket*" "$RACKET_DIR"
+    echo "Racket installed"
 else
-    RUN_INSTALLER="${INSTALLER}"
-fi
 
-echo "Running $RUN_INSTALLER to install Racket:"
+    # Older .travis.yml files don't set $RACKET_DIR (the Racket install
+    # directory) explicitly and expect it to be /usr/racket.
+    if [[ "$RACKET_DIR" = "" ]]; then
+        RACKET_DIR=/usr/racket
+    fi
 
-$RUN_INSTALLER <<EOF
-no
-"$RACKET_DIR"
+    INSTALLER="./racket-${MIN}${RACKET_VERSION}.sh"
+
+    echo "Downloading $URL to $INSTALLER:"
+    curl -L -o $INSTALLER $URL
+
+    echo "Making $INSTALLER executable:"
+    chmod u+rx "$INSTALLER"
+
+    # Only use sudo if installing to /usr
+    if [[ "$RACKET_DIR" = /usr* ]]; then
+        RUN_INSTALLER="sudo ${INSTALLER}"
+    else
+        RUN_INSTALLER="${INSTALLER}"
+    fi
+
+    echo "Running $RUN_INSTALLER to install Racket:"
+
+    $RUN_INSTALLER <<EOF
+    no
+    "$RACKET_DIR"
 
 EOF
 
-if [[ "$RACKET_MINIMAL" = "1" ]]; then
-    echo "Minimal Racket: Installing packages for raco test..."
-    ${RACKET_DIR}/bin/raco pkg install --auto --scope installation rackunit-lib compiler-lib
+    if [[ "$RACKET_MINIMAL" = "1" ]]; then
+        echo "Minimal Racket: Installing packages for raco test..."
+        ${RACKET_DIR}/bin/raco pkg install --auto --scope installation rackunit-lib compiler-lib
+    fi
 fi
 
 exit 0
