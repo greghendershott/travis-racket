@@ -73,6 +73,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     echo "Mounting installer"
     MOUNT=$(hdiutil attach "$INSTALLER" | grep Volumes | cut -f 3)
+    echo "Copying racket to ${RACKET_DIR}"
     cp -a "${MOUNT}/Racket v${RACKET_VERSION}" "${RACKET_DIR}"
     echo "Racket installed"
 else
