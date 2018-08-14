@@ -11,35 +11,40 @@ fi
 
 DL_BASE="https://mirror.racket-lang.org/installers"
 
-if [[ "$RACKET_VERSION" = "HEAD" ]]; then
-    if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/min-racket-current-x86_64-linux-precise.sh"
-    else
-        URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/racket-test-current-x86_64-linux-precise.sh"
-    fi
-elif [[ "$RACKET_VERSION" = 5.3* ]]; then
-    if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="${DL_BASE}/${RACKET_VERSION}/racket-textual/racket-textual-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
-    else
-        URL="${DL_BASE}/${RACKET_VERSION}/racket/racket-${MIN}${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
-    fi
-elif [[ "$RACKET_VERSION" = "RELEASE" ]]; then
-    URL="http://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux.sh"
-elif [[ "$RACKET_VERSION" = 5.9* ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
-elif [[ "$RACKET_VERSION" = 6.[0-4] ]] || [[ "$RACKET_VERSION" = 6.[0-4].[0-9] ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
-elif [[ "$RACKET_VERSION" = 6.* ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux.sh"
-elif [[ "$RACKET_VERSION" = 7.* ]]; then
-    if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [[ "$RACKET_VERSION" = 7.* ]]; then
         URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-macosx.dmg"
     else
-        URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux.sh"
+        echo "ERROR: Unsupported version ${RACKET_VERSION} on Mac OS X"
+        exit 1
     fi
-else
-    echo "ERROR: Unsupported version ${RACKET_VERSION}"
-    exit 1
+else 
+    if [[ "$RACKET_VERSION" = "HEAD" ]]; then
+        if [[ "$RACKET_MINIMAL" = "1" ]]; then
+            URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/min-racket-current-x86_64-linux-precise.sh"
+        else
+            URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/racket-test-current-x86_64-linux-precise.sh"
+        fi
+    elif [[ "$RACKET_VERSION" = 5.3* ]]; then
+        if [[ "$RACKET_MINIMAL" = "1" ]]; then
+            URL="${DL_BASE}/${RACKET_VERSION}/racket-textual/racket-textual-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
+        else
+            URL="${DL_BASE}/${RACKET_VERSION}/racket/racket-${MIN}${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
+        fi
+    elif [[ "$RACKET_VERSION" = "RELEASE" ]]; then
+        URL="http://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux.sh"
+    elif [[ "$RACKET_VERSION" = 5.9* ]]; then
+        URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
+    elif [[ "$RACKET_VERSION" = 6.[0-4] ]] || [[ "$RACKET_VERSION" = 6.[0-4].[0-9] ]]; then
+        URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
+    elif [[ "$RACKET_VERSION" = 6.* ]]; then
+        URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux.sh"
+    elif [[ "$RACKET_VERSION" = 7.* ]]; then
+        URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux.sh"
+    else
+        echo "ERROR: Unsupported version ${RACKET_VERSION}"
+        exit 1
+    fi
 fi
 
 if [ -n "$TEST" ]; then
@@ -67,8 +72,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     curl -L -o $INSTALLER $URL
 
     echo "Mounting installer"
-    MOUNT=`hdiutil attach "$INSTALLER" | grep Volumes | cut -f 3`
-    cp -a "$MOUNT/Racket*" "$RACKET_DIR"
+    MOUNT=$(hdiutil attach "$INSTALLER" | grep Volumes | cut -f 3)
+    cp -a "${MOUNT}/Racket v${RACKET_VERSION}" "${RACKET_DIR}"
     echo "Racket installed"
 else
 
