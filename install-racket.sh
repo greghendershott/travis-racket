@@ -12,10 +12,11 @@ fi
 DL_BASE="https://mirror.racket-lang.org/installers"
 
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
+    NWU_BASE="http://plt.eecs.northwestern.edu/snapshots/current/installers"
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/min-racket-current-x86_64-linux-precise.sh"
+        URL="${NWU_BASE}/min-racket-current-x86_64-linux-precise.sh"
     else
-        URL="http://plt.eecs.northwestern.edu/snapshots/current/installers/racket-test-current-x86_64-linux-precise.sh"
+        URL="${NWU_BASE}/racket-test-current-x86_64-linux-precise.sh"
     fi
 elif [[ "$RACKET_VERSION" = 5.3* ]]; then
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
