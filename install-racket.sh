@@ -12,7 +12,7 @@ fi
 DL_BASE="https://mirror.racket-lang.org/installers"
 
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
-    NWU_BASE="http://plt.eecs.northwestern.edu/snapshots/current/installers"
+    NWU_BASE="https://plt.eecs.northwestern.edu/snapshots/current/installers"
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
         URL="${NWU_BASE}/min-racket-current-x86_64-linux-precise.sh"
     else
