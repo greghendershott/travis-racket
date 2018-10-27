@@ -25,7 +25,7 @@ elif [[ "$RACKET_VERSION" = 5.3* ]]; then
         URL="${DL_BASE}/${RACKET_VERSION}/racket/racket-${MIN}${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
     fi
 elif [[ "$RACKET_VERSION" = "RELEASE" ]]; then
-    URL="http://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux.sh"
+    URL="https://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux.sh"
 elif [[ "$RACKET_VERSION" = 5.9* ]]; then
     URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
 elif [[ "$RACKET_VERSION" = 6.[0-4] ]] || [[ "$RACKET_VERSION" = 6.[0-4].[0-9] ]]; then
