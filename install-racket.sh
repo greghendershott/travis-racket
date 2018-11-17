@@ -18,6 +18,13 @@ if [[ "$RACKET_VERSION" = "HEAD" ]]; then
     else
         URL="${NWU_BASE}/racket-test-current-x86_64-linux-precise.sh"
     fi
+elif [[ "$RACKET_VERSION" = "HEADCS" ]]; then
+    UTAH_BASE="https://www.cs.utah.edu/plt/snapshots/current/installers"
+    if [[ "$RACKET_MINIMAL" = "1" ]]; then
+	URL="${UTAH_BASE}/min-racket-current-x86_64-linux-cs-xenial.sh"
+    else
+	URL="${UTAH_BASE}/racket-current-x86_64-linux-cs-xenial.sh"
+    fi
 elif [[ "$RACKET_VERSION" = 5.3* ]]; then
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
         URL="${DL_BASE}/${RACKET_VERSION}/racket-textual/racket-textual-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
