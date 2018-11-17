@@ -37,6 +37,7 @@ env:
     - RACKET_VERSION=6.12
     - RACKET_VERSION=7.0
     - RACKET_VERSION=HEAD
+    - RACKET_VERSION=HEADCS
     - RACKET_VERSION=RELEASE
 
 # You may want to test against certain versions of Racket, without
