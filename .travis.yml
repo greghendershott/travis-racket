@@ -1,16 +1,10 @@
 language: c
 
-# To use Travis CI's newer container infrastructure, use the following
-# line. (Also be sure RACKET_DIR is set to somewhere like ~/racket
-# that doesn't require sudo.)
-sudo: false
-
 env:
   global:
     # Supply a global RACKET_DIR environment variable. This is where
     # Racket will be installed. A good idea is to use ~/racket because
-    # that doesn't require sudo to install and is therefore compatible
-    # with Travis CI's newer container infrastructure.
+    # that doesn't require sudo to install.
     - RACKET_DIR=~/racket
   matrix:
     # Supply at least one RACKET_VERSION environment variable. This is
@@ -36,6 +30,7 @@ env:
     - RACKET_VERSION=6.11
     - RACKET_VERSION=6.12
     - RACKET_VERSION=7.0
+    - RACKET_VERSION=7.1
     - RACKET_VERSION=HEAD
     - RACKET_VERSION=HEADCS
     - RACKET_VERSION=RELEASE
