@@ -9,7 +9,7 @@ else
     MIN=""
 fi
 
-DL_BASE="https://mirror.racket-lang.org/installers"
+DL_BASE="https://www.cs.utah.edu/plt/installers
 
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
     NWU_BASE="https://plt.eecs.northwestern.edu/snapshots/current/installers"
