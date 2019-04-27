@@ -9,10 +9,10 @@ else
     MIN=""
 fi
 
-if [[ "$NATIPKG" = "1" ]]; then
-    NATIPKG="-natipkg"
+if [[ "$RACKET_NATIPKG" = "1" ]]; then
+    RACKET_NATIPKG="-natipkg"
 else
-    NATIPKG=""
+    RACKET_NATIPKG=""
 fi
 
 DL_BASE="https://www.cs.utah.edu/plt/installers"
@@ -38,15 +38,15 @@ elif [[ "$RACKET_VERSION" = 5.3* ]]; then
         URL="${DL_BASE}/${RACKET_VERSION}/racket/racket-${MIN}${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
     fi
 elif [[ "$RACKET_VERSION" = "RELEASE" ]]; then
-    URL="https://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux${NATIPKG}.sh"
+    URL="https://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux${RACKET_NATIPKG}.sh"
 elif [[ "$RACKET_VERSION" = 5.9* ]]; then
     URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
 elif [[ "$RACKET_VERSION" = 6.[0-4] ]] || [[ "$RACKET_VERSION" = 6.[0-4].[0-9] ]]; then
     URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
 elif [[ "$RACKET_VERSION" = 6.* ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${NATIPKG}.sh"
+    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}.sh"
 elif [[ "$RACKET_VERSION" = 7.* ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${NATIPKG}.sh"
+    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}.sh"
 else
     echo "ERROR: Unsupported version ${RACKET_VERSION}"
     exit 1
