@@ -14,8 +14,6 @@ env:
     # Supply more than one RACKET_VERSION (as in the example below) to
     # create a Travis-CI build matrix to test against multiple Racket
     # versions.
-    #
-    # The RELEASE snapshot is only available during the release process.
     - RACKET_VERSION=6.1
     - RACKET_VERSION=6.1.1
     - RACKET_VERSION=6.2
@@ -33,13 +31,23 @@ env:
     - RACKET_VERSION=7.1
     - RACKET_VERSION=7.2
     - RACKET_VERSION=7.3
+    # "HEAD" is a daily snapshot built from the `master` branch.
+    # This is the main variant of Racket that uses its own runtime.
     - RACKET_VERSION=HEAD
+    # "HEADCS" is a daily snapshot built from the `master` branch.
+    # This is an experimental variant of Racket that uses Chez Scheme.
     - RACKET_VERSION=HEADCS
+    # "RELEASE" is a release candidate that updates only during the
+    # weeks before a new release. The final release candidate should
+    # remain available until the next release cycle. As a result, you
+    # may leave this in your .travis.yml all the time. See:
+    # <https://pre-release.racket-lang.org/>.
     - RACKET_VERSION=RELEASE
 
-# You may want to test against certain versions of Racket, without
-# having them count against the overall success/failure.
 matrix:
+  # You may want to test against certain versions of Racket, without
+  # having them count against the overall success/failure. For example
+  # here we include the development versions:
   allow_failures:
     - env: RACKET_VERSION=HEAD
     - env: RACKET_VERSION=HEADCS
