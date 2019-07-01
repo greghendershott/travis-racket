@@ -59,7 +59,9 @@ matrix:
 
 
 before_install:
-  - git clone https://github.com/greghendershott/travis-racket.git
+  # Repo history and other branches aren't useful here, so do a shallow clone
+  # to only download the tip of the master branch of the repo.
+  - git clone --depth 1 https://github.com/greghendershott/travis-racket.git
   - cat travis-racket/install-racket.sh | bash # pipe to bash not sh!
   - export PATH="${RACKET_DIR}/bin:${PATH}" #install-racket.sh can't set for us
 
