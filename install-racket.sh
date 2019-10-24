@@ -15,6 +15,13 @@ else
     RACKET_NATIPKG=""
 fi
 
+if [[ "$RACKET_CS" = "1" ]]; then
+    RACKET_CS="-cs"
+else
+    RACKET_CS=""
+fi
+
+
 DL_BASE="https://www.cs.utah.edu/plt/installers"
 
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
@@ -48,7 +55,7 @@ elif [[ "$RACKET_VERSION" = 6.[0-4] ]] || [[ "$RACKET_VERSION" = 6.[0-4].[0-9] ]
 elif [[ "$RACKET_VERSION" = 6.* ]]; then
     URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}.sh"
 elif [[ "$RACKET_VERSION" = 7.* ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}.sh"
+    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}${RACKET_CS}.sh"
 else
     echo "ERROR: Unsupported version ${RACKET_VERSION}"
     exit 1
