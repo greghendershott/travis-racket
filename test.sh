@@ -1,3 +1,5 @@
+shellcheck ./install-racket.sh
+
 # Starting with Racket 7.4, there is also a "CS" flavor.
 for VER in 7.4 ; do
     for MIN in 0 1; do
