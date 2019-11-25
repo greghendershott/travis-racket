@@ -9,4 +9,5 @@ language: c
 
 script:
   - shellcheck install-racket.sh
+  - shellcheck test.sh
   - ./test.sh
