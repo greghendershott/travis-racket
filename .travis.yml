@@ -59,29 +59,19 @@ matrix:
   # fail have succeeded.
   fast_finish: true
 
-
-before_install:
-  # Repo history and other branches aren't useful here, so do a shallow clone
-  # to only download the tip of the master branch of the repo.
-  - git clone --depth 1 https://github.com/greghendershott/travis-racket.git
-  - cat travis-racket/install-racket.sh | bash # pipe to bash not sh!
-  - export PATH="${RACKET_DIR}/bin:${PATH}" #install-racket.sh can't set for us
-
 install:
-
-before_script:
+  - bash <(curl https://raw.githubusercontent.com/greghendershott/travis-racket/master/install-racket.sh)
+  - export PATH="${RACKET_DIR}/bin:${PATH}" #install-racket.sh can't set for us
 
 # Here supply steps such as raco make, raco test, etc.
 script:
   - raco make main.rkt
   - raco test -x .
 
-# OR: If your repo is a Racket package with an info.rkt that includes
-# some `deps`:
+# OR: If your repo is a Racket package with an info.rkt that has any
+# `deps`:
 #
 # script:
-# - raco pkg install --deps search-auto
-# - raco setup -D --check-pkg-deps <your-package-name>
-# - raco test -x -p <your-package-name>
-
-after_script:
+#   - raco pkg install --deps search-auto
+#   - raco setup -D --check-pkg-deps <your-package-name>
+#   - raco test -x -p <your-package-name>
