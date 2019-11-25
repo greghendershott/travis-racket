@@ -1,15 +1,19 @@
+![Build Status](https://travis-ci.org/greghendershott/travis-racket.svg?branch=master)
+
 Until/unless Travis CI gets built-in support for Racket, we can use
-the `install` section of `.travis.yml` to download and run the Racket
-installer.
+the `install:` section of `.travis.yml` to download and run the
+installer for various versions and variants of Racket.
 
-To add this capability to your project, simply add the
-[example `.travis.yml`](https://github.com/greghendershott/travis-racket/blob/master/example/.travis.yml)
-to your repo. You may need to change its `script` section's `raco
-make` and `raco test` parts.
+To use in your project, simply add the [example
+`.travis.yml`](example/.travis.yml) to the root of your repo.
 
-> **NOTE:** Use `example/.travis.yml` --- *not* the one in the root of this rrepo, which is intended to test this repo not your project.
+> **NOTE:** Use `example/.travis.yml` --- *not* the one in the root of
+> this repo, which is intended to test this repo not your project.
 
-Here's a "badge" showing the status for the `master` branch of this
-repo:
+You may need to make some small edits to the file, as explained in its
+comments. Specifically:
 
-[![Build Status](https://travis-ci.org/greghendershott/travis-racket.png?branch=master)](https://travis-ci.org/greghendershott/travis-racket)
+- You may want to change the `RACKET_VERSION` values, depending on
+  which versions of Racket you intend to support.
+
+- You may need to change its `script:` section to suit your project.
