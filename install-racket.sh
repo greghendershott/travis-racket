@@ -23,6 +23,23 @@ else
     RACKET_CS=""
 fi
 
+# If this section seems like a mess, it is, because reasons:
+#
+# - The download URL naming conventions have changed over the years.
+#
+# - The Linux version name has changed over the years.
+#
+# - From time to time a Racket download server has gone offline, in
+#   which case this file has been "hot fixed". In the absence of any
+#   clear resolution signal ("you can resume using the original
+#   server"), the hot fix remains in place (until maybe someday it
+#   needs to be hot fixed).
+#
+# On the one hand, it sucks. On the other hand, a large part of the
+# "added value" of this repo that it deals with the suckage so that
+# ordinary users need not. They can supply names for Racket versions
+# and variants using a consistent naming scheme, and we'll try to make
+# it work.
 
 DL_BASE="https://www.cs.utah.edu/plt/installers"
 
