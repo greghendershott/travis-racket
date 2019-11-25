@@ -1,7 +1,10 @@
 #!/bin/bash
-
-# IMPORTANT: Your .travis.yml must pipe this to bash (not to sh)!
-# In the Travis CI environment a #!/bin/bash shebang here won't help.
+#
+# In the Travis CI environment `#!/bin/bash` won't suffice (it's here
+# to make shellcheck happy and for convenience when using this script
+# locally).
+#
+# Instead .travis.yml should pipe this script to bash (not to sh).
 
 set -e
 
