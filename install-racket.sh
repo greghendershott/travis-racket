@@ -83,11 +83,8 @@ else
     exit 1
 fi
 
-if [ -n "$TEST" ]; then
-  printf "%s %-7s %-120s " "$RACKET_MINIMAL" "$RACKET_VERSION" "$URL"
-fi
-
-echo "Checking installer"
+printf "%-25s" "${MIN}${RACKET_VERSION}${RACKET_NATIPKG}${RACKET_CS}"
+echo "@ ${URL}"
 if  curl -I -L "$URL" 2>&1 | grep 404.Not.Found ; then
     echo "Installer not available"
     if [[ "$RACKET_VERSION" = "HEAD" ]]; then
@@ -97,7 +94,6 @@ if  curl -I -L "$URL" 2>&1 | grep 404.Not.Found ; then
 fi
 
 if [ -n "$TEST" ]; then
-    echo "GOOD"
     exit 0
 fi
 
