@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # IMPORTANT: Your .travis.yml must pipe this to bash (not to sh)!
 # In the Travis CI environment a #!/bin/bash shebang here won't help.
 
@@ -62,11 +64,11 @@ else
 fi
 
 if [ -n "$TEST" ]; then
-  printf "%s %-7s %-120s " $RACKET_MINIMAL $RACKET_VERSION $URL
+  printf "%s %-7s %-120s " "$RACKET_MINIMAL" "$RACKET_VERSION" "$URL"
 fi
 
 echo "Checking installer"
-if  curl -I -L $URL 2>&1 | grep 404.Not.Found ; then
+if  curl -I -L "$URL" 2>&1 | grep 404.Not.Found ; then
     echo "Installer not available"
     if [[ "$RACKET_VERSION" = "HEAD" ]]; then
         echo "Did the build fail? Check the logs at https://plt.eecs.northwestern.edu/snapshots/current/log/"
@@ -88,7 +90,7 @@ fi
 INSTALLER="./racket-${MIN}${RACKET_VERSION}.sh"
 
 echo "Downloading $URL to $INSTALLER:"
-curl -L -o $INSTALLER $URL
+curl -L -o "$INSTALLER" "$URL"
 
 echo "Making $INSTALLER executable:"
 chmod u+rx "$INSTALLER"
