@@ -1,6 +1,6 @@
 #lang racket
 
-;; A comment.
+;; This is just an example file used to test the example .travis.yml
 
 (define (plus1 x)
   (add1 x))
