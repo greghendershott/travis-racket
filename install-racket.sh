@@ -46,19 +46,22 @@ fi
 
 DL_BASE="https://www.cs.utah.edu/plt/installers"
 
+# In theory either NWU or Utah should work for downloading snapshot
+# a.k.a. HEAD builds. In practice, it varies from time to time.
+## HEAD_BASE="https://plt.eecs.northwestern.edu/snapshots/current"
+HEAD_BASE="https://www.cs.utah.edu/plt/snapshots/current"
+
 if [[ "$RACKET_VERSION" = "HEAD" ]]; then
-    NWU_BASE="https://plt.eecs.northwestern.edu/snapshots/current/installers"
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="${NWU_BASE}/min-racket-current-x86_64-linux-precise.sh"
+        URL="${HEAD_BASE}/installers/min-racket-current-x86_64-linux-precise.sh"
     else
-        URL="${NWU_BASE}/racket-test-current-x86_64-linux-precise.sh"
+        URL="${HEAD_BASE}/installers/racket-current-x86_64-linux-precise.sh"
     fi
 elif [[ "$RACKET_VERSION" = "HEADCS" ]]; then
-    UTAH_BASE="https://www.cs.utah.edu/plt/snapshots/current/installers"
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="${UTAH_BASE}/min-racket-current-x86_64-linux-cs-xenial.sh"
+        URL="${HEAD_BASE}/installers/min-racket-current-x86_64-linux-cs-xenial.sh"
     else
-        URL="${UTAH_BASE}/racket-current-x86_64-linux-cs-xenial.sh"
+        URL="${HEAD_BASE}/installers/racket-current-x86_64-linux-cs-xenial.sh"
     fi
 elif [[ "$RACKET_VERSION" = 5.3* ]]; then
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
@@ -88,7 +91,7 @@ echo "@ ${URL}"
 if  curl -I -L "$URL" 2>&1 | grep 404.Not.Found ; then
     echo "Installer not available"
     if [[ "$RACKET_VERSION" = "HEAD" ]]; then
-        echo "Did the build fail? Check the logs at https://plt.eecs.northwestern.edu/snapshots/current/log/"
+        echo "Did the build fail? Check the logs at ${HEAD_BASE}/log/"
     fi
     exit 1
 fi
