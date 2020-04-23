@@ -44,56 +44,61 @@ fi
 # and variants using a consistent naming scheme, and we'll try to make
 # it work.
 
-DL_BASE="https://www.cs.utah.edu/plt/installers"
+HOST_1="https://www.cs.utah.edu/plt/"
+HOST_2="https://plt.eecs.northwestern.edu/"
 
-# In theory either NWU or Utah should work for downloading snapshot
-# a.k.a. HEAD builds. In practice, it varies from time to time.
-## HEAD_BASE="https://plt.eecs.northwestern.edu/snapshots/current"
-HEAD_BASE="https://www.cs.utah.edu/plt/snapshots/current"
-
-if [[ "$RACKET_VERSION" = "HEAD" ]]; then
-    if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="${HEAD_BASE}/installers/min-racket-current-x86_64-linux-precise.sh"
-    else
-        URL="${HEAD_BASE}/installers/racket-current-x86_64-linux-precise.sh"
-    fi
-elif [[ "$RACKET_VERSION" = "HEADCS" ]]; then
-    if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="${HEAD_BASE}/installers/min-racket-current-x86_64-linux-cs-xenial.sh"
-    else
-        URL="${HEAD_BASE}/installers/racket-current-x86_64-linux-cs-xenial.sh"
-    fi
-elif [[ "$RACKET_VERSION" = 5.3* ]]; then
-    if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="${DL_BASE}/${RACKET_VERSION}/racket-textual/racket-textual-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
-    else
-        URL="${DL_BASE}/${RACKET_VERSION}/racket/racket-${MIN}${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
-    fi
-elif [[ "$RACKET_VERSION" = "RELEASE" ]]; then
-    URL="https://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux${RACKET_NATIPKG}.sh"
+if [[ "$RACKET_VERSION" = "RELEASE" ]]; then
+    URL_1="https://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux${RACKET_NATIPKG}.sh"
+    URL_2="${URL_1}"
 elif [[ "$RACKET_VERSION" = "RELEASECS" ]]; then
-    URL="https://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux${RACKET_NATIPKG}-cs.sh"
-elif [[ "$RACKET_VERSION" = 5.9* ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
-elif [[ "$RACKET_VERSION" = 6.[0-4] ]] || [[ "$RACKET_VERSION" = 6.[0-4].[0-9] ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
-elif [[ "$RACKET_VERSION" = 6.* ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}.sh"
-elif [[ "$RACKET_VERSION" = 7.* ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}${RACKET_CS}.sh"
+    URL_1="https://pre-release.racket-lang.org/installers/racket-${MIN}current-x86_64-linux${RACKET_NATIPKG}-cs.sh"
+    URL_2="${URL_1}"
 else
-    echo "ERROR: Unsupported version ${RACKET_VERSION}"
-    exit 1
+    if [[ "$RACKET_VERSION" = "HEAD" ]]; then
+        if [[ "$RACKET_MINIMAL" = "1" ]]; then
+            P="snapshots/current/installers/min-racket-current-x86_64-linux-precise.sh"
+        else
+            P="snapshots/current/installers/racket-current-x86_64-linux-precise.sh"
+        fi
+    elif [[ "$RACKET_VERSION" = "HEADCS" ]]; then
+        if [[ "$RACKET_MINIMAL" = "1" ]]; then
+            P="snapshots/current/installers/min-racket-current-x86_64-linux-cs-xenial.sh"
+        else
+            P="snapshots/current/installers/racket-current-x86_64-linux-cs-xenial.sh"
+        fi
+    elif [[ "$RACKET_VERSION" = 5.3* ]]; then
+        if [[ "$RACKET_MINIMAL" = "1" ]]; then
+            P="installers/${RACKET_VERSION}/racket-textual/racket-textual-${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
+        else
+            P="installers/${RACKET_VERSION}/racket/racket-${MIN}${RACKET_VERSION}-bin-x86_64-linux-debian-squeeze.sh"
+        fi
+    elif [[ "$RACKET_VERSION" = 5.9* ]]; then
+        P="installers/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-quantal.sh"
+    elif [[ "$RACKET_VERSION" = 6.[0-4] ]] || [[ "$RACKET_VERSION" = 6.[0-4].[0-9] ]]; then
+        P="installers/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux-ubuntu-precise.sh"
+    elif [[ "$RACKET_VERSION" = 6.* ]]; then
+        P="installers/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}.sh"
+    elif [[ "$RACKET_VERSION" = 7.* ]]; then
+        P="installers/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}${RACKET_CS}.sh"
+    else
+        echo "ERROR: Unsupported version ${RACKET_VERSION}"
+        exit 1
+    fi
+
+    URL_1="${HOST_1}${P}"
+    URL_2="${HOST_2}${P}"
 fi
 
 printf "%-25s" "${MIN}${RACKET_VERSION}${RACKET_NATIPKG}${RACKET_CS}"
-echo "@ ${URL}"
-if  curl -I -L "$URL" 2>&1 | grep 404.Not.Found ; then
-    echo "Installer not available"
-    if [[ "$RACKET_VERSION" = "HEAD" ]]; then
-        echo "Did the build fail? Check the logs at ${HEAD_BASE}/log/"
+echo "@ ${URL_1} or ${URL_2}"
+if  curl -I -L --max-time 60 "{$URL_1}" 2>&1 | grep 404.Not.Found ; then
+    echo "${URL_1} not available; trying ${URL_2}"
+    if curl -I -L --max-time 60 "${URL_2}" 2>&1 | grep 404.Not.Found ; then
+        if [[ "$RACKET_VERSION" = "HEAD" ]]; then
+            echo "Did the build fail? Check the logs at ${HOST_2}snapshots/current//log/"
+        fi
+        exit 1
     fi
-    exit 1
 fi
 
 if [ -n "$TEST" ]; then
