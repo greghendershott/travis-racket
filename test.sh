@@ -17,7 +17,7 @@ for VER in HEAD 7.3 7.2 7.1 7.0 6.12 6.11 6.10 6.9 6.8 6.7 6.6 6.5 ; do
 done
 
 # Starting with Racket 7.4, there is also a "CS" flavor.
-for VER in HEAD HEADCS 7.7 7.6 7.5 7.4 ; do
+for VER in HEAD HEADCS 7.8 7.7 7.6 7.5 7.4 ; do
     for MIN in 0 1; do
         for NAT in 0 1; do
             for CS in 0 1; do
