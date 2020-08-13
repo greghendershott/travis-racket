@@ -51,17 +51,17 @@ DL_BASE="https://www.cs.utah.edu/plt/installers"
 ## HEAD_BASE="https://plt.eecs.northwestern.edu/snapshots/current"
 HEAD_BASE="https://www.cs.utah.edu/plt/snapshots/current"
 
-if [[ "$RACKET_VERSION" = "HEAD" ]]; then
+if [[ "$RACKET_VERSION" = "HEADBC" ]]; then
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="${HEAD_BASE}/installers/min-racket-current-x86_64-linux-precise.sh"
+        URL="${HEAD_BASE}/installers/racket-minimal-current-x86_64-linux-precise-bc.sh"
     else
-        URL="${HEAD_BASE}/installers/racket-current-x86_64-linux-precise.sh"
+        URL="${HEAD_BASE}/installers/racket-current-x86_64-linux-precise-bc.sh"
     fi
-elif [[ "$RACKET_VERSION" = "HEADCS" ]]; then
+elif [[ "$RACKET_VERSION" = "HEADCS" || "$RACKET_VERSION" = "HEAD" ]]; then
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
-        URL="${HEAD_BASE}/installers/min-racket-current-x86_64-linux-cs-xenial.sh"
+        URL="${HEAD_BASE}/installers/racket-minimal-current-x86_64-linux-xenial.sh"
     else
-        URL="${HEAD_BASE}/installers/racket-current-x86_64-linux-cs-xenial.sh"
+        URL="${HEAD_BASE}/installers/racket-current-x86_64-linux-xenial.sh"
     fi
 elif [[ "$RACKET_VERSION" = 5.3* ]]; then
     if [[ "$RACKET_MINIMAL" = "1" ]]; then
