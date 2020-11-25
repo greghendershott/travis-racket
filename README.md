@@ -1,5 +1,11 @@
 ![Build Status](https://travis-ci.org/greghendershott/travis-racket.svg?branch=master)
 
+**UPDATE:** In light of Travis CI limiting open source "credits", as
+of 2020-11-25 I have stopped using it for my own projects. Instead I
+am using the [`setup-racket` action](https://github.com/Bogdanp/setup-racket) with GitHub Actions.
+
+---
+
 Until/unless Travis CI gets built-in support for Racket, we can use
 the `install:` section of `.travis.yml` to download and run the
 installer for various versions and variants of Racket.
