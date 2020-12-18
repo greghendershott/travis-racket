@@ -2,9 +2,9 @@
 
 As of 2020-11-25 I no longer use Travis CI for my projects.
 
-Instead I am using [`setup-racket`](action) with GitHub Actions.
-
-[action]:https://github.com/Bogdanp/setup-racket
+Instead I am using
+[`setup-racket`](https://github.com/Bogdanp/setup-racket) with GitHub
+Actions.
 
 After maintaining this repo for eight years, I'm glad to pass the
 baton.
