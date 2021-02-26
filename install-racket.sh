@@ -81,6 +81,8 @@ elif [[ "$RACKET_VERSION" = 6.* ]]; then
     URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}.sh"
 elif [[ "$RACKET_VERSION" = 7.* ]]; then
     URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}${RACKET_CS}.sh"
+elif [[ "$RACKET_VERSION" = 8.* ]]; then
+    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}${RACKET_CS}.sh"
 else
     echo "ERROR: Unsupported version ${RACKET_VERSION}"
     exit 1
