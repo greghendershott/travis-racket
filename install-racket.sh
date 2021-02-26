@@ -45,6 +45,7 @@ fi
 # it work.
 
 DL_BASE="https://www.cs.utah.edu/plt/installers"
+MIRROR_DL_BASE="https://mirror.racket-lang.org/installers"
 
 # In theory either NWU or Utah should work for downloading snapshot
 # a.k.a. HEAD builds. In practice, it varies from time to time.
@@ -82,7 +83,7 @@ elif [[ "$RACKET_VERSION" = 6.* ]]; then
 elif [[ "$RACKET_VERSION" = 7.* ]]; then
     URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}${RACKET_CS}.sh"
 elif [[ "$RACKET_VERSION" = 8.* ]]; then
-    URL="${DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}${RACKET_CS}.sh"
+    URL="${MIRROR_DL_BASE}/${RACKET_VERSION}/racket-${MIN}${RACKET_VERSION}-x86_64-linux${RACKET_NATIPKG}${RACKET_CS}.sh"
 else
     echo "ERROR: Unsupported version ${RACKET_VERSION}"
     exit 1
